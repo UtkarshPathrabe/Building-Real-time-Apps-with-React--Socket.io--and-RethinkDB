@@ -8,7 +8,7 @@ function createDrawing({ connection, name }) {
 		.then(() => console.log('Created a drawing with name: ', name));
 }
 
-function subscribeToDrawings({ client, connection }) {
+function subscribeToDrawings({ connection, client }) {
 	r.table('drawings')
 		.changes({ include_initial: true })
 		.run(connection)
@@ -17,6 +17,13 @@ function subscribeToDrawings({ client, connection }) {
 				client.emit('drawing', drawingRow.new_val),
 			);
 		});
+}
+
+function handleLinePublish({ connection, line }) {
+	console.log('Saving line to the DB');
+	r.table('lines')
+		.insert(Object.assign(line, { timestamp: new Date() }))
+		.run(connection);
 }
 
 r.connect({
@@ -31,6 +38,12 @@ r.connect({
 		client.on('subscribeToDrawings', () =>
 			subscribeToDrawings({
 				client,
+				connection,
+			}),
+		);
+		client.on('publishLine', (line) =>
+			handleLinePublish({
+				line,
 				connection,
 			}),
 		);
