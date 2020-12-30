@@ -26,6 +26,19 @@ function handleLinePublish({ connection, line }) {
 		.run(connection);
 }
 
+function subscribeToDrawingLines({ connection, client, drawingId }) {
+	return r
+		.table('lines')
+		.filter(r.row('drawingId').eq(drawingId))
+		.changes({ include_initial: true })
+		.run(connection)
+		.then((cursor) => {
+			cursor.each((err, lineRow) =>
+				client.emit(`drawingLine:${drawingId}`, lineRow.new_val),
+			);
+		});
+}
+
 r.connect({
 	host: 'localhost',
 	port: 28015,
@@ -45,6 +58,13 @@ r.connect({
 			handleLinePublish({
 				line,
 				connection,
+			}),
+		);
+		client.on('subscribeToDrawingLines', (drawingId) =>
+			subscribeToDrawingLines({
+				client,
+				connection,
+				drawingId,
 			}),
 		);
 	});
