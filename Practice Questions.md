@@ -37,3 +37,36 @@ B. fromEventPattern
 C. onEvent  
 D. mapEventToObservable  
 Answer: `fromEventPattern`  
+
+Q06. What method can you override on a React component in order to prevent unnecessary rendering?  
+A. shouldComponentUpdate  
+B. componentWillUpdate  
+C. checkForUpdates  
+D. skipUpdateWhen  
+Answer: `shouldComponentUpdate`  
+
+Q07. What is the benefit of handling buffering of events outside of your React component?  
+A. React components can only take arrays and don't work well with events  
+B. It makes the component simpler and unaware of the architecture around it  
+C. React components are not able to handle multiple events and selectively updating  
+Answer: `It makes the component simpler and unaware of the architecture around it`  
+
+Q08. What Socket.IO event can you subscribe to on the client when you want to be notified that a connection to the server has been established?  
+A. on-connect  
+B. connection-established  
+C. open  
+D. connected  
+Answer: `connected`  
+
+Q09. How can you ensure that a Socket.IO server handled an event successfully?  
+A. This is not possible because Socket.IO is fire and forget  
+B. By sending a callback function through on emit  
+C. By using the promise API of Socket.IO  
+D. You should listen for another event on the client and emit it from the server  
+Answer: `By sending a callback function through on emit`  
+
+Q10. When you have an RxJS `Observable`, with events containing a timestamp value on a field called `ts`, how can you get the most recent value from the Observable?  
+A. By mapping over the events in the Observable and storing the most recent value on a variable  
+B. By using the scan operator on the Observable and using Math.max for each item  
+C. By using the filter operator on the Observable and only returning events with a recent timestamp  
+Answer: `By using the scan operator on the Observable and using Math.max for each item`  
