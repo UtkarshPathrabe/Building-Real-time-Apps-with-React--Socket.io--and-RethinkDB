@@ -70,3 +70,22 @@ A. By mapping over the events in the Observable and storing the most recent valu
 B. By using the scan operator on the Observable and using Math.max for each item  
 C. By using the filter operator on the Observable and only returning events with a recent timestamp  
 Answer: `By using the scan operator on the Observable and using Math.max for each item`  
+
+Q11. You are working on the client and you have already opened a connection to a Websocket on the server. The socket reference is on a variable called `socket`. How do you subscribe to an event called `hello` coming from the server and call a function called `sayHi`?  
+A. socket.hello(sayHi)  
+B. socket.on('hello', sayHi)  
+C. socket.subscribe('hello', sayHi)  
+D. socket.on({ event: 'hello', callback: sayHi })  
+Answer: `socket.on('hello', sayHi)`  
+
+Q12. You have the following code:  
+```
+r.table('messages')
+  .insert({ message: 'hi there' })
+```
+You would like the code to execute and insert the new record to the `messages` table. What method do you need to add on the chain?  
+A. commit  
+B. save  
+C. run  
+D. execute  
+Answer: `run`  
